@@ -13,7 +13,7 @@ class ProductRemoteDatasource {
       link
     );
     
-    List<dynamic> data = jsonDecode(response.body);;
+    List<dynamic> data = jsonDecode(response.body);
     
     List<ProductModel> products = [];
     data.forEach((item) {
