@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import '../models/product_model.dart';
+import 'package:product_app/features/product/data/models/product_model.dart';
 
 class ProductRemoteDatasource {
-  final Client client;
+  final Client client = Client();
   final Uri link = Uri.parse("https://fakestoreapi.com/products");
 
-  ProductRemoteDatasource(this.client);
+  ProductRemoteDatasource();
   
   Future<List<ProductModel>> getProducts() async {
     final response = await client.get(
@@ -16,9 +16,10 @@ class ProductRemoteDatasource {
     List<dynamic> data = jsonDecode(response.body);
     
     List<ProductModel> products = [];
-    data.forEach((item) {
+    
+    for(var item in data) {
       products.add(ProductModel.fromJson(item));
-    });
+    }
 
     return products;
   }

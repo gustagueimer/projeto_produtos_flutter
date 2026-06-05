@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:product_app/features/product/data/repositories/product_repository_impl.dart';
 import 'package:product_app/features/product/domain/entities/product.dart';
+import 'package:product_app/features/product/domain/repositories/product_repository.dart';
 import 'package:product_app/features/product/presentation/states/product_state_provider.dart';
-import '../../domain/repositories/product_repository.dart';
 
 class ProductViewModel {
-  final ProductRepository repository;
+  final ProductRepository repository = ProductRepositoryImpl();
   final WidgetRef ref;
 
-  ProductViewModel(this.repository, this.ref);
+  ProductViewModel(this.ref);
 
   Future<void> loadProducts() async {
     ref.watch(productStateNotifierProvider.notifier).changeLoading();

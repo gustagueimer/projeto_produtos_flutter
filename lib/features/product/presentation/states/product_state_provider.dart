@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:product_app/features/product/domain/entities/product.dart';
 import 'package:product_app/features/product/presentation/states/product_state.dart';
+
+Logger logger = Logger();
 
 class ProductStateNotifier extends Notifier<ProductState> {
 
@@ -33,7 +36,7 @@ class ProductStateNotifier extends Notifier<ProductState> {
     int idx = updatedList.lastIndexWhere((product) => product.id == p.id);
     Product updatedProduct = updatedList.elementAt(idx).copyWith(p.id, p.title, p.price, p.image, favState);
     updatedList[idx] = updatedProduct; 
-    print(updatedList.elementAt(idx).toString());
+    logger.d(updatedList.elementAt(idx).toString());
     state = state.copyWith(products: updatedList);
   }
 }
