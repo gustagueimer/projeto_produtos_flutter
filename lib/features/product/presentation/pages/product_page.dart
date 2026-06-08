@@ -26,6 +26,9 @@ class ProductPage extends ConsumerWidget {
             itemBuilder: (context, index) {
               final product = plop.products[index];
               return ListTile(
+                onTap: () {
+                  viewModel.navigateToDetails(context, product);
+                },
                 leading: Image.network(product.image),
                 title: Text(product.title),
                 subtitle: Text("\$${product.price}"),
