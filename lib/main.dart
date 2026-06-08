@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:product_app/features/product/data/datasources/product_cache_datasource.dart';
-import 'package:product_app/features/product/data/datasources/product_remote_datasource.dart';
-import 'package:product_app/features/product/data/repositories/product_repository_impl.dart';
-import 'package:product_app/features/product/presentation/pages/product_page.dart';
-import 'package:product_app/features/product/presentation/viewmodels/product_viewmodel.dart';
+import 'package:product_app/core/presentation/pages/landing_page.dart';
+import 'package:product_app/core/presentation/viewmodels/landing_page_viewmodel.dart';
 
 void main() {
   runApp(
@@ -23,17 +19,7 @@ class AppRoot extends ConsumerWidget {
     return MaterialApp(
       title: 'Product Listing 101',
       theme: ThemeData(useMaterial3: true),
-      home: ProductPage(
-              viewModel: ProductViewModel(
-                          ProductRepositoryImpl(
-                            ProductRemoteDatasource(
-                              Client()
-                            ),
-                            ProductCacheDatasource()
-                          ),
-                          ref  
-                        )
-            ),
+      home: LandingPage(viewmodel: LandingPageViewmodel(ref))
     );
   }
 }

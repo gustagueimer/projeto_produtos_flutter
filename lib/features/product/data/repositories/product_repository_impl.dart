@@ -1,16 +1,15 @@
 import 'package:product_app/core/errors/faliure.dart';
-import 'package:product_app/features/product/data/datasources/product_cache_datasource.dart';
+import 'package:product_app/features/product/domain/entities/product.dart';
+import 'package:product_app/features/product/domain/repositories/product_repository.dart';
 import 'package:product_app/features/product/data/models/product_model.dart';
-
-import '../../domain/repositories/product_repository.dart';
-import '../../domain/entities/product.dart';
-import '../datasources/product_remote_datasource.dart';
+import 'package:product_app/features/product/data/datasources/product_remote_datasource.dart';
+import 'package:product_app/features/product/data/datasources/product_cache_datasource.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  final ProductRemoteDatasource remote;
-  final ProductCacheDatasource cache;
+  final ProductRemoteDatasource remote = ProductRemoteDatasource();
+  final ProductCacheDatasource cache = ProductCacheDatasource();
     
-  ProductRepositoryImpl(this.remote, this.cache);
+  ProductRepositoryImpl();
     
   @override
   Future<List<Product>> getProducts() async {
@@ -21,6 +20,7 @@ class ProductRepositoryImpl implements ProductRepository {
         .map((m) => Product(
           id: m.id, 
           title: m.title, 
+          description: m.description,
           price: m.price, 
           image: m.image,
           fav: m.fav,
@@ -32,6 +32,7 @@ class ProductRepositoryImpl implements ProductRepository {
       .map((m) => Product(
         id: m.id,
         title: m.title,
+        description: m.description,
         price: m.price,
         image: m.image,
         fav: m.fav,
@@ -48,6 +49,7 @@ class ProductRepositoryImpl implements ProductRepository {
      .map((p) => ProductModel(
         id: p.id, 
         title: p.title, 
+        description: p.description,
         price: p.price, 
         image: p.image,
         fav: p.fav

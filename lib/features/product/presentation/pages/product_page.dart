@@ -1,10 +1,7 @@
-//import 'package:product_app/features/product/presentation/states/produto_riverpod_state.dart';
-
-import 'package:product_app/features/product/presentation/states/product_state_provider.dart';
-
-import '../viewmodels/product_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:product_app/features/product/presentation/states/product_state_provider.dart';
+import 'package:product_app/features/product/presentation/viewmodels/product_viewmodel.dart';
 
 class ProductPage extends ConsumerWidget {
   final ProductViewModel viewModel;
@@ -29,6 +26,9 @@ class ProductPage extends ConsumerWidget {
             itemBuilder: (context, index) {
               final product = plop.products[index];
               return ListTile(
+                onTap: () {
+                  viewModel.navigateToDetails(context, product);
+                },
                 leading: Image.network(product.image),
                 title: Text(product.title),
                 subtitle: Text("\$${product.price}"),
