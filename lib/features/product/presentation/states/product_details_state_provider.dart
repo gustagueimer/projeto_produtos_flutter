@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:product_app/features/product/domain/entities/product.dart';
 import 'package:product_app/features/product/presentation/states/product_details_state.dart';
+
+Logger logger = Logger();
 
 class ProductDetailsStateNotifier extends Notifier<ProductDetailsState> {
 
@@ -23,6 +26,12 @@ class ProductDetailsStateNotifier extends Notifier<ProductDetailsState> {
 
   void changeError(String error) {
     state = state.copyWith(error: error);
+  }
+
+  void changeFav(Product p, bool? favState) {
+    Product produtoAtualizado = p.copyWith(fav: favState);
+    logger.d(produtoAtualizado);
+    state = state.copyWith(produto: produtoAtualizado);
   }
 }
 
