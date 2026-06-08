@@ -34,7 +34,7 @@ class ProductStateNotifier extends Notifier<ProductState> {
     }
     List<Product> updatedList = state.products;
     int idx = updatedList.lastIndexWhere((product) => product.id == p.id);
-    Product updatedProduct = updatedList.elementAt(idx).copyWith(p.id, p.title, p.price, p.image, favState);
+    Product updatedProduct = updatedList.elementAt(idx).copyWith(fav: favState);
     updatedList[idx] = updatedProduct; 
     logger.d(updatedList.elementAt(idx).toString());
     state = state.copyWith(products: updatedList);

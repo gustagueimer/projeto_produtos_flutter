@@ -20,6 +20,7 @@ class ProductRepositoryImpl implements ProductRepository {
         .map((m) => Product(
           id: m.id, 
           title: m.title, 
+          description: m.description,
           price: m.price, 
           image: m.image,
           fav: m.fav,
@@ -31,6 +32,7 @@ class ProductRepositoryImpl implements ProductRepository {
       .map((m) => Product(
         id: m.id,
         title: m.title,
+        description: m.description,
         price: m.price,
         image: m.image,
         fav: m.fav,
@@ -47,6 +49,7 @@ class ProductRepositoryImpl implements ProductRepository {
      .map((p) => ProductModel(
         id: p.id, 
         title: p.title, 
+        description: p.description,
         price: p.price, 
         image: p.image,
         fav: p.fav
