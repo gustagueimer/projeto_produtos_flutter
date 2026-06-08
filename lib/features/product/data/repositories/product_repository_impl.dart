@@ -56,6 +56,83 @@ class ProductRepositoryImpl implements ProductRepository {
       ))
       .toList()
     );
-    
-  }  
+  }
+
+  @override
+  Future<Product> getProductById(int id) async {
+    try {
+      final p = await remote.getProductById(id);
+      return Product(
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        price: p.price,
+        image: p.image,
+        fav: false
+      );
+    } catch(e) {
+      throw Failure("Não foi possível buscar o produto");
+    }
+  }
+
+  @override
+  Future<bool> saveProduct(Product product) async {
+    try{
+      final response = await remote.saveProduct(
+        ProductModel(
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        )
+      );
+      
+      if(response != true) {
+        throw Exception();
+      }
+
+      return response;
+    } catch(e) {
+      throw Failure("Não foi possível salvar o produto");
+    }  
+  } 
+
+  @override
+  Future updateProduct(Product product) async {
+    try{
+      final response = await remote.saveProduct(
+        ProductModel(
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        )
+      );
+      
+      if(response != true) {
+        throw Exception();
+      }
+
+      return response;
+    } catch(e) {
+      throw Failure("Não foi possível atualizar o produto");
+    }
+  }
+
+  @override
+  Future<bool> deleteProduct(int id) async {
+    try {
+      final response = await remote.deleteProduct(id);
+      
+      if(response != true) {
+        throw Exception();
+      }
+
+      return response;
+    } catch(e) {
+      throw Failure("Não foi possível apagar o produto");
+    }
+  }
 }
