@@ -35,14 +35,27 @@ class ProductDetailsPage extends ConsumerWidget{
                     width: 250.0,
                     height: 250.0,
                   ),
-                  Text(
-                    plup.produto!.title,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  FittedBox(
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          plup.produto!.title,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(onPressed: () => {viewmodel.changefav(plup.produto!)},
+                          icon: Icon(
+                            Icons.star,
+                            color: viewmodel.fave(plup.produto!),
+                          )
+                        ),
+                      ],
+                    ) 
                   ),
+                  
                   Text(
                     Stringbuffer.writeSumthing("R\$ ", plup.produto!.price.toString()),
                     textAlign: TextAlign.left,
@@ -52,7 +65,7 @@ class ProductDetailsPage extends ConsumerWidget{
                     )
                   ),
                   Text("Descrição do produto:"),
-                  Text("lmao"),
+                  Text(plup.produto!.description),
                 ],
               );
             }
