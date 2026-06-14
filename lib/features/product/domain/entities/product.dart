@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 class Product {
   final int id;
   final String title;
@@ -5,6 +7,7 @@ class Product {
   final double price;
   final String image;
   final bool fav;
+  final Uint8List? fotoBytes;
   
   const Product({
     required this.id,
@@ -13,6 +16,7 @@ class Product {
     required this.price,
     required this.image,
     this.fav = false,
+    this.fotoBytes,
   });
 
   Product copyWith({
@@ -21,7 +25,8 @@ class Product {
     String? description,
     double? price,
     String? image,
-    bool? fav
+    bool? fav,
+    Uint8List? fotoBytes
   }){
     return Product(
       id: id ?? this.id,
@@ -29,12 +34,17 @@ class Product {
       description: description ?? this.description,
       price: price ?? this.price,
       image: image ?? this.image,
-      fav: fav ?? this.fav
+      fav: fav ?? this.fav,
+      fotoBytes: fotoBytes ?? this.fotoBytes
     );
   }
 
   @override
   String toString() {
-    return "Product(id: $id, title: $title, price: $price, image: $image, fav: $fav);";
+    bool isFotoBytes = false;
+    if(fotoBytes != null) {
+      isFotoBytes = true;
+    }
+    return "Product(id: $id, title: $title, price: $price, image: $image, fotoBytes: $isFotoBytes fav: $fav);";
   }
 } 

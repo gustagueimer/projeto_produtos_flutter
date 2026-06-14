@@ -32,4 +32,15 @@ class ProductModel {
       image: json["image"],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id':id,
+      'title':title,
+      'description':description,
+      'price':price,
+      'category':'lmao',
+      'image':Uri.parse(image).toString(),
+    };
+  }
 }

@@ -30,26 +30,45 @@ class ProductDetailsPage extends ConsumerWidget{
                 textBaseline: TextBaseline.alphabetic,
                 spacing: 10.0,
                 children: <Widget>[
-                  Image.network(
-                    plup.produto!.image,
-                    width: 250.0,
-                    height: 250.0,
+                  viewmodel.returnImage(plup.produto!),
+                  Text(
+                    plup.produto!.title,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   FittedBox(
                     child: Row(
                       children: <Widget>[
-                        Text(
-                          plup.produto!.title,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        IconButton(
+                          onPressed: () => {
+                            viewmodel.deleteProduct(context),
+                            viewmodel.navigateBackToProducts(context),
+                          },
+                          color: Colors.redAccent,
+                          icon: Icon(
+                            Icons.delete,
+                          )
                         ),
-                        IconButton(onPressed: () => {viewmodel.changefav(plup.produto!)},
+                        IconButton(
+                          onPressed: () => {
+                            viewmodel.navigateToEditProduct(context, plup.produto!)
+                          },
+                          color: Colors.greenAccent,
+                          icon: Icon(
+                            Icons.edit,
+                          )
+                        ),
+                        IconButton(
+                          onPressed: () => {
+                            viewmodel.changefav(plup.produto!)
+                          },
+                          color: viewmodel.fave(plup.produto!),
+                          highlightColor: Colors.yellow,
                           icon: Icon(
                             Icons.star,
-                            color: viewmodel.fave(plup.produto!),
                           )
                         ),
                       ],
