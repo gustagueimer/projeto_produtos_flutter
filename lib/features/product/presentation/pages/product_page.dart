@@ -29,14 +29,18 @@ class ProductPage extends ConsumerWidget {
                 onTap: () {
                   viewModel.navigateToDetails(context, product);
                 },
-                leading: Image.network(product.image),
+                leading: viewModel.returnImage(product),
                 title: Text(product.title),
                 subtitle: Text("\$${product.price}"),
-                trailing: IconButton(onPressed: () => {viewModel.changefav(product)},
-                 icon: Icon(
-                  Icons.star,
+                trailing: IconButton(
+                  onPressed: () => {
+                    viewModel.changefav(product)
+                  },
                   color: viewModel.fave(product),
-                  )
+                  highlightColor: Colors.yellow,
+                  icon: Icon(
+                    Icons.star,
+                  )            
                 ),
               );
             },
@@ -47,6 +51,16 @@ class ProductPage extends ConsumerWidget {
         onPressed: viewModel.loadProducts,
         child: const Icon(Icons.download),
       ),
+      persistentFooterButtons: [
+        Center(child: 
+          ElevatedButton(
+            onPressed: () {
+              viewModel.navigateToNewProduct(context);
+            }, 
+            child: Text("Criar Produto")
+          ),
+        ),
+      ],
     );
   }
 }
