@@ -20,7 +20,6 @@ class ProductRemoteDatasource {
     logger.d(response.statusCode);
 
     List<dynamic> data = jsonDecode(response.body);
-    logger.d(data);
 
     List<ProductModel> products = [];
     
@@ -47,11 +46,12 @@ class ProductRemoteDatasource {
     Map<String, String> headers = {
       "Content-Type":"application/json"
     };
-
+    logger.d(product.toJson());
+    logger.d(jsonEncode(product.toJson()));
     final response = await client.post(
       Uri.parse(link),
       headers: headers,
-      body: product.toJson(),
+      body: jsonEncode(product.toJson()),
     );
     logger.d(response.statusCode);
 
@@ -70,7 +70,7 @@ class ProductRemoteDatasource {
     final response = await client.put(
       Uri.parse(Stringbuffer.writeSumthing(Stringbuffer.writeSumthing(link, "/"), product.id.toString())),
       headers: headers,
-      body: product.toJson(),
+      body: jsonEncode(product.toJson()),
     );
     logger.d(response.statusCode);
 
