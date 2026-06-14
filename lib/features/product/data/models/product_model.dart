@@ -40,7 +40,7 @@ class ProductModel {
       'description':description,
       'price':price,
       'category':'lmao',
-      'image':Uri.parse(image),
+      'image':Uri.parse(image).toString(),
     };
   }
 }
