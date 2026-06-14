@@ -131,7 +131,6 @@ class ProductFormViewmodel {
       listaNova.add(produto);
       ref.read(productStateNotifierProvider.notifier).changeProductList(listaNova);
       repository.saveCache(listaNova);
-      reciclarProduto();
       ref.read(provider.notifier).changeLoading();
       return;
     }
@@ -141,7 +140,6 @@ class ProductFormViewmodel {
     ref.read(productStateNotifierProvider.notifier).changeProductList(listaNova);
     ref.read(productDetailsStateNotifierProvider.notifier).changeProduto(produto);
     repository.saveCache(listaNova);
-    reciclarProduto();
     ref.read(provider.notifier).changeLoading();
   }
 
@@ -181,5 +179,10 @@ class ProductFormViewmodel {
       ref.read(provider.notifier).changeError(e.toString());
       ref.read(provider.notifier).changeLoading();
     }
+  }
+
+  void navegateBackToProducts(BuildContext context) {
+    reciclarProduto();
+    Navigator.pop(context);
   }
 }

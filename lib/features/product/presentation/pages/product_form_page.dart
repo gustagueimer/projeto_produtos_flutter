@@ -155,6 +155,7 @@ class ProductFormPage extends ConsumerWidget{
                   ElevatedButton.icon(
                     onPressed: () {
                       viewmodel.criarProduto(context);
+                      viewmodel.navegateBackToProducts(context);
                     },
                     label: Text("Salvar Produto"),
                     icon: Icon(Icons.save),
