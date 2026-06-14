@@ -1,9 +1,12 @@
+import 'package:logger/logger.dart';
 import 'package:product_app/core/errors/faliure.dart';
 import 'package:product_app/features/product/domain/entities/product.dart';
 import 'package:product_app/features/product/domain/repositories/product_repository.dart';
 import 'package:product_app/features/product/data/models/product_model.dart';
 import 'package:product_app/features/product/data/datasources/product_remote_datasource.dart';
 import 'package:product_app/features/product/data/datasources/product_cache_datasource.dart';
+
+Logger logger = Logger();
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductRemoteDatasource remote = ProductRemoteDatasource();
@@ -71,6 +74,7 @@ class ProductRepositoryImpl implements ProductRepository {
         fav: false
       );
     } catch(e) {
+      logger.d(e.toString());
       throw Failure("Não foi possível buscar o produto");
     }
   }
@@ -93,7 +97,8 @@ class ProductRepositoryImpl implements ProductRepository {
       }
 
       return response;
-    } catch(e) {
+    } catch(e, stack) {
+      logger.e(e, stackTrace: stack);
       throw Failure("Não foi possível salvar o produto");
     }  
   } 
