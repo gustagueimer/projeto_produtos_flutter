@@ -28,4 +28,4 @@
 26. [OK] Uso de Provider, Riverpod, BLoC ou setState justificado
 27. [OK] Separação entre modelo, serviço, sessão e tela
 28. [OK] Tratamento de carregamento
-29. [-] Tratamento de erro nas requisições
+29. [OK] Tratamento de erro nas requisições
