@@ -5,13 +5,13 @@
 3. [OK] Organização em camadas ou pastas separadas
 4. [-] Uso da API DummyJSON
 5. [OK] Tela de login
-6. [-] Validação de usuário e senha
+6. [OK] Validação de usuário e senha
 7. [OK] POST /auth/login funcionando
 8. [OK] Tratamento de erro no login
-9. [-] Bloqueio de acesso sem login
+9. [OK] Bloqueio de acesso sem login
 10. [OK] Tela principal de produtos
-11. [ ] Nome do usuário autenticado exibido
-12. [ ] Botão de logout
+11. [OK] Nome do usuário autenticado exibido
+12. [OK] Botão de logout
 13. [OK] GET /products funcionando
 14. [-] Modelo Product ajustado para DummyJSON
 15. [OK] Lista com título, preço e imagem
@@ -28,4 +28,4 @@
 26. [OK] Uso de Provider, Riverpod, BLoC ou setState justificado
 27. [OK] Separação entre modelo, serviço, sessão e tela
 28. [OK] Tratamento de carregamento
-29. [OK] Tratamento de erro nas requisições
+29. [-] Tratamento de erro nas requisições
