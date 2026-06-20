@@ -3,7 +3,7 @@
 1. [OK] Repositório chamado mobile_arquitetura_01
 2. [OK] Projeto Flutter executável
 3. [OK] Organização em camadas ou pastas separadas
-4. [-] Uso da API DummyJSON
+4. [OK] Uso da API DummyJSON
 5. [OK] Tela de login
 6. [OK] Validação de usuário e senha
 7. [OK] POST /auth/login funcionando
@@ -13,10 +13,10 @@
 11. [OK] Nome do usuário autenticado exibido
 12. [OK] Botão de logout
 13. [OK] GET /products funcionando
-14. [-] Modelo Product ajustado para DummyJSON
+14. [OK] Modelo Product ajustado para DummyJSON
 15. [OK] Lista com título, preço e imagem
 16. [OK] Tela de detalhes do produto
-17. [-] GET /products/{id} ou envio do produto selecionado
+17. [OK] GET /products/{id} ou envio do produto selecionado
 18. [OK] Detalhes com nome, preço, descrição e imagem
 19. [OK] Navegação entre telas
 20. [OK] Uso de Navigator.push ou rotas nomeadas
