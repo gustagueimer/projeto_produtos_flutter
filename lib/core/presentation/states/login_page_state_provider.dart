@@ -18,7 +18,7 @@ class LoginPageStateNotifier extends Notifier<LoginPageState>{
     state = state.copyWith(isLoading: true);
   }
 
-  void changeError(String error) {
+  void changeError(String? error) {
     state = state.copyWith(error: error);
   }
 
@@ -26,7 +26,7 @@ class LoginPageStateNotifier extends Notifier<LoginPageState>{
     state = state.copyWith(login: login);
   }
 
-  void changeUser(User user) {
+  void changeUser(User? user) {
     state = state.copyWith(sessao: user);
   }
 }

@@ -22,7 +22,7 @@ class LoginPageState {
   }) {
     return LoginPageState(
       isLoading: isLoading ?? this.isLoading,
-      sessao: sessao ?? this.sessao,
+      sessao: sessao,
       login: login ?? this.login,
       error: error ?? this.error,
     );
