@@ -22,12 +22,15 @@ class LoginPage extends ConsumerWidget{
       body: Builder(
         builder: (context) {
           if(plop.sessao != null) {
-            Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (context) => ProductPage(viewModel: ProductViewModel(ref))
-      )
-    );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ref.read(loginPageStateNotifierProvider.notifier).changeLoading();
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (context) => ProductPage(viewModel: ProductViewModel(ref))
+                )
+              );
+            });
           }
           if(plop.isLoading == true) {
             return const Center(child: CircularProgressIndicator());
