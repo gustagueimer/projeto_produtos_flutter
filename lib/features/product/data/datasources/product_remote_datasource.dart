@@ -9,7 +9,7 @@ Logger logger = Logger();
 
 class ProductRemoteDatasource {
   final Client client = Client();
-  final String link = "https://fakestoreapi.com/products";
+  final String link = "https://dummyjson.com/products";
 
   ProductRemoteDatasource();
   
@@ -19,11 +19,11 @@ class ProductRemoteDatasource {
     );
     logger.d(response.statusCode);
 
-    List<dynamic> data = jsonDecode(response.body);
+    dynamic data = jsonDecode(response.body);
 
     List<ProductModel> products = [];
     
-    for(var item in data) {
+    for(var item in data["products"]) {
       products.add(ProductModel.fromJson(item));
     }
 

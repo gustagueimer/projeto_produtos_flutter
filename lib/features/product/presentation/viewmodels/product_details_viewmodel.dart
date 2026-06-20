@@ -93,13 +93,7 @@ class ProductDetailsViewmodel {
   }
 
   void navigateBackToProducts(BuildContext context) {
-    ref.read(productDetailsStateNotifierProvider.notifier).changeProduto(Product(
-      id: 0, 
-      title: '', 
-      description: '', 
-      price: 0.0, 
-      image: ''
-    ));
+    ref.read(productDetailsStateNotifierProvider.notifier).changeProduto(null);
     Navigator.pop(context);
   }
 

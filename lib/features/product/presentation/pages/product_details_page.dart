@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:product_app/core/utils/stringbuffer.dart';
+import 'package:product_app/features/product/domain/entities/product.dart';
 import 'package:product_app/features/product/presentation/states/product_details_state_provider.dart';
 import 'package:product_app/features/product/presentation/viewmodels/product_details_viewmodel.dart';
 
@@ -13,7 +14,16 @@ class ProductDetailsPage extends ConsumerWidget{
     final plup = ref.watch(productDetailsStateNotifierProvider);
     
     return Scaffold(
-      appBar: AppBar(title: Text("Produto")),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              viewmodel.navigateBackToProducts(context);
+            });
+          }, 
+          icon: Icon(Icons.arrow_back)),
+        title: Text("Produto")
+        ),
       body: Builder(
         builder: (context) {
           if(plup.isLoading == true) {
@@ -30,9 +40,9 @@ class ProductDetailsPage extends ConsumerWidget{
                 textBaseline: TextBaseline.alphabetic,
                 spacing: 10.0,
                 children: <Widget>[
-                  viewmodel.returnImage(plup.produto!),
+                  viewmodel.returnImage(plup.produto ?? Product(id: 0, title: "title", description: "description", price: 0.0, image: "")),
                   Text(
-                    plup.produto!.title,
+                    plup.produto?.title ?? "title",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 24.0,
@@ -54,7 +64,7 @@ class ProductDetailsPage extends ConsumerWidget{
                         ),
                         IconButton(
                           onPressed: () => {
-                            viewmodel.navigateToEditProduct(context, plup.produto!)
+                            viewmodel.navigateToEditProduct(context, plup.produto ?? Product(id: 0, title: "title", description: "description", price: 0.0, image: ""))
                           },
                           color: Colors.greenAccent,
                           icon: Icon(
@@ -63,9 +73,10 @@ class ProductDetailsPage extends ConsumerWidget{
                         ),
                         IconButton(
                           onPressed: () => {
-                            viewmodel.changefav(plup.produto!)
+                            if(plup.produto != null) 
+                            viewmodel.changefav(plup.produto ?? Product(id: 0, title: "title", description: "description", price: 0.0, image: ""))
                           },
-                          color: viewmodel.fave(plup.produto!),
+                          color: viewmodel.fave(plup.produto ?? Product(id: 0, title: "title", description: "description", price: 0.0, image: "")),
                           highlightColor: Colors.yellow,
                           icon: Icon(
                             Icons.star,
@@ -76,7 +87,7 @@ class ProductDetailsPage extends ConsumerWidget{
                   ),
                   
                   Text(
-                    Stringbuffer.writeSumthing("R\$ ", plup.produto!.price.toString()),
+                    Stringbuffer.writeSumthing("R\$ ", plup.produto?.price.toString() ?? "0.00"),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 16.0,
@@ -84,7 +95,7 @@ class ProductDetailsPage extends ConsumerWidget{
                     )
                   ),
                   Text("Descrição do produto:"),
-                  Text(plup.produto!.description),
+                  Text(plup.produto?.description ?? "desc"),
                 ],
               );
             }

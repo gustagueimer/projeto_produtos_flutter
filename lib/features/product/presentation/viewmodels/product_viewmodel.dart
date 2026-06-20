@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:product_app/core/presentation/states/login_page_state_provider.dart';
 import 'package:product_app/features/product/data/repositories/product_repository_impl.dart';
 import 'package:product_app/features/product/domain/entities/product.dart';
 import 'package:product_app/features/product/domain/repositories/product_repository.dart';
@@ -11,14 +12,27 @@ import 'package:product_app/features/product/presentation/states/product_form_st
 import 'package:product_app/features/product/presentation/states/product_state_provider.dart';
 import 'package:product_app/features/product/presentation/viewmodels/product_details_viewmodel.dart';
 import 'package:product_app/features/product/presentation/viewmodels/product_form_viewmodel.dart';
+import 'package:product_app/features/user/data/repositories/user_repository_impl.dart';
 
 Logger logger = Logger();
 
 class ProductViewModel {
   final ProductRepository repository = ProductRepositoryImpl();
+  final UserRepositoryImpl userRepository = UserRepositoryImpl();
   final WidgetRef ref;
 
   ProductViewModel(this.ref);
+
+  void encerrarSessao() async {
+    try {
+      await userRepository.deleteTokenCache();
+      await userRepository.deleteUserCache();
+      ref.read(loginPageStateNotifierProvider.notifier).changeUser(null);
+      ref.invalidate(productStateNotifierProvider);
+    } catch(e, stack) {
+      logger.e(e, stackTrace: stack);
+    }
+  }
 
   Future<void> loadProducts() async {
     ref.watch(productStateNotifierProvider.notifier).changeLoading();
@@ -151,25 +165,29 @@ class ProductViewModel {
   }
 
   void navigateToNewProduct(BuildContext context) {
-    if(ref.read(productFormStateNotifierProvider).produto == null) {
-      ref.read(productFormStateNotifierProvider.notifier).updateProduto(
-        Product(
-          id: 0,
-          title: "",
-          description: "",
-          price: 0.0,
-          image: "", 
+    try{
+      if(ref.read(productFormStateNotifierProvider).produto == null) {
+        ref.read(productFormStateNotifierProvider.notifier).updateProduto(
+          Product(
+            id: 0,
+            title: "",
+            description: "",
+            price: 0.0,
+            image: "", 
+          )
+        );
+      }
+      if(ref.read(productFormStateNotifierProvider).formEditar) {
+        ref.read(productFormStateNotifierProvider.notifier).changeFormMode();
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) => ProductFormPage(viewmodel: ProductFormViewmodel(ref: ref))
         )
       );
+    } catch(e, stack) {
+      logger.e(e, stackTrace: stack);
     }
-    if(ref.read(productFormStateNotifierProvider).formEditar) {
-      ref.read(productFormStateNotifierProvider.notifier).changeFormMode();
-    }
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (context) => ProductFormPage(viewmodel: ProductFormViewmodel(ref: ref))
-      )
-    );
   }
 }

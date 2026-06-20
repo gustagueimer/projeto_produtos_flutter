@@ -24,12 +24,13 @@ class ProductModel {
   }
   
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    List<dynamic> list = json["images"];
     return ProductModel(
       id: json["id"],
       title: json["title"],
       description: json["description"],
       price: json["price"].toDouble(),
-      image: json["image"],
+      image: list.first,
     );
   }
 
