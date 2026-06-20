@@ -12,7 +12,7 @@ class ProductDetailsStateNotifier extends Notifier<ProductDetailsState> {
     return ProductDetailsState();
   }
 
-  void changeProduto(Product produto) {
+  void changeProduto(Product? produto) {
     state = state.copyWith(produto: produto);
   }
 
