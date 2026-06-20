@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:product_app/core/presentation/pages/landing_page.dart';
-import 'package:product_app/core/presentation/viewmodels/landing_page_viewmodel.dart';
+import 'package:product_app/core/presentation/pages/login_page.dart';
+import 'package:product_app/core/presentation/viewmodels/login_page_viewmodel.dart';
 
 void main() {
   runApp(
@@ -19,7 +19,7 @@ class AppRoot extends ConsumerWidget {
     return MaterialApp(
       title: 'Product Listing 101',
       theme: ThemeData(useMaterial3: true),
-      home: LandingPage(viewmodel: LandingPageViewmodel(ref))
+      home: LoginPage(viewmodel: LoginPageViewmodel(ref))
     );
   }
 }
