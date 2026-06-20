@@ -17,7 +17,7 @@ class ProductDetailsState {
     String? error
   }) {
     return ProductDetailsState(
-      produto: produto ?? this.produto,
+      produto: produto,
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error
     );

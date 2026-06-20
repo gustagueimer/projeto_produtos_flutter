@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:product_app/core/presentation/states/login_page_state_provider.dart';
+import 'package:product_app/features/product/presentation/pages/product_details_page.dart';
+import 'package:product_app/features/product/presentation/states/product_details_state_provider.dart';
 import 'package:product_app/features/product/presentation/states/product_state_provider.dart';
+import 'package:product_app/features/product/presentation/viewmodels/product_details_viewmodel.dart';
 import 'package:product_app/features/product/presentation/viewmodels/product_viewmodel.dart';
 
 class ProductPage extends ConsumerWidget {
@@ -12,6 +15,7 @@ class ProductPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final plop = ref.watch(productStateNotifierProvider);
     final plep = ref.read(loginPageStateNotifierProvider);
+    final plup = ref.read(productDetailsStateNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,6 +41,17 @@ class ProductPage extends ConsumerWidget {
         builder: (context) {
           if(plep.sessao == null) {
             Navigator.maybePop(context);
+          }
+          if(plup.produto != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ref.read(productStateNotifierProvider.notifier).changeLoading();
+              Navigator.push(
+                context, 
+                MaterialPageRoute<void>(
+                  builder: (context) => ProductDetailsPage(viewmodel: ProductDetailsViewmodel(ref: ref))
+                )
+              );
+            });
           }
           if(plop.isLoading == true) {
             return const Center(child: CircularProgressIndicator());
