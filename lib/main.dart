@@ -17,7 +17,8 @@ class AppRoot extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Product Listing 101',
+      title: 'Produtos-Mobile.com',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       home: LoginPage(viewmodel: LoginPageViewmodel(ref))
     );
